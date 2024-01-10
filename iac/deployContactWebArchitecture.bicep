@@ -8,6 +8,7 @@ param location string
 @description('YYYYMMDD with your initials to follow (i.e. 20291231acw)')
 param uniqueIdentifier string
 
+//   SQL Server Params
 param sqlServerName string
 param sqlDatabaseName string
 param sqlServerAdminLogin string
@@ -15,11 +16,17 @@ param sqlServerAdminLogin string
 param sqlServerAdminPassword string
 param clientIPAddress string
 
+// Log Analytics Params
+param logAnalyticsWorkspaceName string
+
+
 
 resource contactWebResourceGroup 'Microsoft.Resources/resourceGroups@2018-05-01' = {
   name: rgName
   location: location
 }
+
+
 
 module contactWebDatabase 'azureSQL.bicep' = {
   name: '${sqlServerName}-${sqlDatabaseName}-${uniqueIdentifier}'
@@ -32,5 +39,14 @@ module contactWebDatabase 'azureSQL.bicep' = {
     sqlServerAdminLogin: sqlServerAdminLogin
     sqlServerAdminPassword: sqlServerAdminPassword
     clientIPAddress: clientIPAddress
+  }
+}
+
+module contactWebAnalyticsWorkspace 'logAnalyticsWorkspace.bicep' = {
+  name: '${logAnalyticsWorkspaceName}-deployment'
+  scope: contactWebResourceGroup
+  params: {
+    location: contactWebResourceGroup.location
+    logAnalyticsWorkspaceName: logAnalyticsWorkspaceName
   }
 }
