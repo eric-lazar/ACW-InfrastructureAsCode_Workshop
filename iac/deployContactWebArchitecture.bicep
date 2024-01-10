@@ -30,6 +30,9 @@ param identityDBConnectionStringKey string
 param managerDBConnectionStringKey string
 param appInsightsConnectionStringKey string
 
+// key vault
+param keyVaultName string
+
 
 resource contactWebResourceGroup 'Microsoft.Resources/resourceGroups@2018-05-01' = {
   name: rgName
@@ -84,5 +87,19 @@ module contactWebApplicationPlanAndSite 'contactWebAppService.bicep' = {
     identityDBConnectionStringKey: identityDBConnectionStringKey
     managerDBConnectionStringKey: managerDBConnectionStringKey
     appInsightsConnectionStringKey: appInsightsConnectionStringKey
+  }
+}
+
+module contactWebVault 'keyVault.bicep' = {
+  name: '${keyVaultName}-deployment'
+  scope: contactWebResourceGroup
+  params: {
+    location: contactWebResourceGroup.location
+    uniqueIdentifier: uniqueIdentifier
+    webAppFullName: contactWebApplicationPlanAndSite.outputs.webAppFullName
+    databaseServerName: contactWebDatabase.outputs.sqlServerName
+    keyVaultName: keyVaultName
+    sqlDatabaseName: sqlDatabaseName
+    sqlServerAdminPassword: sqlServerAdminPassword
   }
 }

@@ -49,6 +49,9 @@
         },
         "appInsightsConnectionStringKey": { 
             "value": "APPINSIGHTS:CONNECTIONSTRING"
+        },
+        "keyVaultName": {
+            "value": "KV-ContactWeb"
         }
     }
 }
