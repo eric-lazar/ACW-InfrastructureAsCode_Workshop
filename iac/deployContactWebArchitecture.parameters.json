@@ -5,6 +5,9 @@
         "rgName": {
             "value": "ContactWebApplicationRG"
         },
+        "location": {
+            "value": "eastus"
+        },
         "uniqueIdentifier": {
             "value": "20240110ecl"
         },
