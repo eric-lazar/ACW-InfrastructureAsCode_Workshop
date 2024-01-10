@@ -22,6 +22,14 @@ param logAnalyticsWorkspaceName string
 // App Insights Params
 param appInsightsName string
 
+// web app
+param webAppName string
+param appServicePlanName string
+param appServicePlanSku string
+param identityDBConnectionStringKey string
+param managerDBConnectionStringKey string
+param appInsightsConnectionStringKey string
+
 
 resource contactWebResourceGroup 'Microsoft.Resources/resourceGroups@2018-05-01' = {
   name: rgName
@@ -60,5 +68,21 @@ module contactWebApplicationInsights 'applicationInsights.bicep' = {
     location: contactWebResourceGroup.location
     appInsightsName: appInsightsName
     logAnalyticsWorkspaceId: contactWebAnalyticsWorkspace.outputs.logAnalyticsWorkspaceId
+  }
+}
+
+module contactWebApplicationPlanAndSite 'contactWebAppService.bicep' = {
+  name: '${webAppName}-deployment'
+  scope: contactWebResourceGroup
+  params: {
+    location: contactWebResourceGroup.location
+    uniqueIdentifier: uniqueIdentifier
+    appInsightsName: contactWebApplicationInsights.outputs.applicationInsightsName
+    appServicePlanName: appServicePlanName
+    appServicePlanSku: appServicePlanSku
+    webAppName: webAppName
+    identityDBConnectionStringKey: identityDBConnectionStringKey
+    managerDBConnectionStringKey: managerDBConnectionStringKey
+    appInsightsConnectionStringKey: appInsightsConnectionStringKey
   }
 }

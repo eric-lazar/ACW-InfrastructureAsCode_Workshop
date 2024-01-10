@@ -2,35 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "rgName": {
-            "value": "ContactWebApplicationRG"
-        },
         "location": {
             "value": "eastus"
         },
         "uniqueIdentifier": {
-            "value": "20240110ecl"
-        },
-        "sqlServerName": {
-            "value": "ContactWebDBServer"
-        },
-        "sqlDatabaseName": {
-            "value": "ContactWebDB"
-        },
-        "sqlServerAdminLogin": {
-            "value": "contactwebdbuser"
-        },
-        "sqlServerAdminPassword": {
-            "value": "workshopDbPwd#54321!"
-        },
-        "clientIPAddress": {
-            "value": "10.10.10.10"
-        },
-        "logAnalyticsWorkspaceName": {
-            "value": "contactWebAnalytics"
-        },
-        "appInsightsName": {
-            "value": "contactWebAppInsights"
+            "value": "20291231acw"
         },
         "appServicePlanName": {
             "value": "contactWebASP"
@@ -40,6 +16,9 @@
         },
         "webAppName": {
             "value": "ContactWeb"
+        },
+        "appInsightsName": {
+            "value": "contactWebAppInsights"
         },
         "identityDBConnectionStringKey": {
             "value": "ConnectionStrings:DefaultConnection"
