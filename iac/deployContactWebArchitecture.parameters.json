@@ -28,6 +28,9 @@
         },
         "logAnalyticsWorkspaceName": {
             "value": "contactWebAnalytics"
+        },
+        "appInsightsName": {
+            "value": "contactWebAppInsights"
         }
     }
 }
